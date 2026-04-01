@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>学院抽签</title>
+  <style>
+    body {
+      font-family: Arial, "Microsoft YaHei", sans-serif;
+      background: #f5f7fb;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      margin: 0;
+    }
+    .box {
+      background: white;
+      padding: 30px;
+      border-radius: 16px;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.08);
+      width: 360px;
+    }
+    h2 {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+    input, button {
+      width: 100%;
+      padding: 12px;
+      margin-top: 10px;
+      border-radius: 10px;
+      border: 1px solid #ccc;
+      font-size: 16px;
+      box-sizing: border-box;
+    }
+    button {
+      background: #2563eb;
+      color: white;
+      border: none;
+      cursor: pointer;
+    }
+    button:hover {
+      background: #1d4ed8;
+    }
+    .result {
+      margin-top: 20px;
+      padding: 16px;
+      background: #f0f4ff;
+      border-radius: 12px;
+      line-height: 1.8;
+    }
+  </style>
+</head>
+<body>
+  <div class="box">
+    <h2>学院抽签</h2>
+    <input type="text" id="college" placeholder="请输入学院名称" />
+    <button onclick="drawLots()">开始抽签</button>
+
+    <div class="result" id="result" style="display:none;"></div>
+  </div>
+
+  <script>
+    const songs = [
+      "夜空中最亮的星",
+      "平凡之路",
+      "我和我的祖国",
+      "稻香",
+      "海阔天空",
+      "奔跑"
+    ];
+
+    const numbers = Array.from({ length: 30 }, (_, i) => i + 1);
+
+    function getRandomItem(arr) {
+      return arr[Math.floor(Math.random() * arr.length)];
+    }
+
+    function drawLots() {
+      const college = document.getElementById("college").value.trim();
+      const resultDiv = document.getElementById("result");
+
+      if (!college) {
+        alert("请先输入学院名称");
+        return;
+      }
+
+      const song = getRandomItem(songs);
+      const number = getRandomItem(numbers);
+
+      resultDiv.style.display = "block";
+      resultDiv.innerHTML = `
+        <strong>学院：</strong>${college}<br>
+        <strong>抽中歌曲：</strong>${song}<br>
+        <strong>抽中序号：</strong>${number}
+      `;
+    }
+  </script>
+</body>
+</html>
